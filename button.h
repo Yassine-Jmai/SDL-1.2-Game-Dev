@@ -5,7 +5,7 @@
 #include "background.h"
 
 void handleMouseMotion(SDL_Event *event, Image *B);
-void mainMenu_display(Image B1, Image B2, Image B3, Image B4, Image B11, Image B21, Image B31, Image B41, Image backg, SDL_Surface *ecran);
+void mainMenu_display(Image B1, Image B2, Image B3, Image B4, Image B11, Image B21, Image B31, Image B41, Image backg, SDL_Surface *ecran, int *i);
 void play_display(Image pb, SDL_Surface *ecran,Image n,Image lg,Image n1,Image lg1,Image x1);
 void handMouseClicks(SDL_Event *event, int *mode,int *done, Image B1, Image B2,Image B3, Image B4 ,Mix_Chunk *c, Image *p,Image yes,Image no,Image x1);
 void settings_display(Image sb, SDL_Surface *ecran, Image so, Image fu, Image w, Image fu1, Image w1, Image p,Image x1);

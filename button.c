@@ -14,29 +14,46 @@ void movePoint(Image *point, int direction, int speed) {
     // Move the point horizontally by adjusting its x position
     point->pos1.x += direction * speed;
 }
-void mainMenu_display(Image B1, Image B2, Image B3, Image B4, Image B11, Image B21, Image B31, Image B41, Image backg, SDL_Surface *ecran)
+void mainMenu_display(Image B1, Image B2, Image B3, Image B4, Image B11, Image B21, Image B31, Image B41, Image backg, SDL_Surface *ecran, int *i)
 {
 
        
 	afficher(backg, ecran);
 	if(B1.hovered == 0)
 		afficher(B1, ecran);
-	else
+	else{
 		afficher(B11, ecran);
+		*i = 1;
+	}
 
 	if(B2.hovered == 0)
 		afficher(B2, ecran);
-	else
+	else{
 		afficher(B21, ecran);
+		*i = 2;
+	}
 
 	if(B3.hovered == 0)
 		afficher(B3, ecran);
-	else
+	else{
 		afficher(B31, ecran);
+		*i = 3;
+	}
 
 	if(B4.hovered == 0)
 		afficher(B4, ecran);
-	else
+	else{
+		afficher(B41, ecran);
+		*i = 4;
+	}
+	
+	if(*i == 1)
+		afficher(B11, ecran);
+	else if(*i == 2)
+		afficher(B21, ecran);
+	else if(*i == 3)
+		afficher(B31, ecran);
+	else if(*i == 4)
 		afficher(B41, ecran);
 }
 

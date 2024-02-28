@@ -7,7 +7,7 @@ int main(int argc, char **argv) {
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
 
     SDL_Surface *ecran;
-    int done = 1, mode = 0;
+    int done = 1, mode = 0, i = 0, f = 1;
     Image backg, B1, B2, B3, B4, B11, B21, B31, B41, n, lg, pb, n1, lg1, sb, so, fu, w, fu1, w1, p, mc, mq, yes, yes1, no,no1,x1;
     SDL_Event e;
     Mix_Chunk *cs;
@@ -102,15 +102,43 @@ int main(int argc, char **argv) {
                     break;
                 case SDL_KEYDOWN:
                     // Handle key presses
-                    if (e.key.keysym.sym == SDLK_ESCAPE)
-                        mode = 0;
+                    if (e.key.keysym.sym == SDLK_ESCAPE){
+                        if(mode == 0)
+                        	mode = 4;
+                        else
+	                        mode = 0;   
+	            }             
+                    if (e.key.keysym.sym == SDLK_DOWN){
+                        i++;
+                        Mix_PlayChannel(-1, cs, 0);
+                        if(i == 5)
+                        	i = 1;
+                    }
+                    if (e.key.keysym.sym == SDLK_RETURN){
+                    	if(i==1)
+                    		mode = 1;
+                    	else if(i == 2)
+                    		mode = 2;
+                    	else if(i == 3)
+				mode = 3;
+                    	else
+				mode = 4;
+                    }
+                    if(e.key.keysym.sym == SDLK_f)
+                    	if(f == 1){
+                    		f = 2;
+                    		ecran = ecran = SDL_SetVideoMode(SCREEN_W, SCREEN_H, 32, SDL_SWSURFACE | SDL_FULLSCREEN);
+                    	}else{
+                    		f = 1;
+                    		ecran = SDL_SetVideoMode(SCREEN_W, SCREEN_H, 32, SDL_SWSURFACE);
+                    	}
                     break;
             }
         }
 
         // Render the appropriate display based on the current mode
         if (mode == 0) {
-            mainMenu_display(B1, B2, B3, B4, B11, B21, B31, B41, backg, ecran);
+            mainMenu_display(B1, B2, B3, B4, B11, B21, B31, B41, backg, ecran, &i);
         } else if (mode == 1) {
             play_display(pb, ecran, n, lg, n1, lg1,x1);
         } else if (mode == 2) {
@@ -123,7 +151,6 @@ int main(int argc, char **argv) {
 
         // Update the display
         SDL_Flip(ecran);
-        SDL_Delay(10); // Adjust the delay if needed
     }
 
     // Free all allocated resources
